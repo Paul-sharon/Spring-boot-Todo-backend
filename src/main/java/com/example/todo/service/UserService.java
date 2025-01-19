@@ -6,6 +6,8 @@ import com.example.todo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;  // Import List
+
 @Service
 public class UserService {
 
@@ -30,5 +32,10 @@ public class UserService {
     // Get user by ID
     public User getUserById(Long id) {
         return userRepository.findById(id).orElse(null);
+    }
+
+    // Get all users
+    public List<User> getAllUsers() {
+        return userRepository.findAll();  // Return all users from the repository
     }
 }

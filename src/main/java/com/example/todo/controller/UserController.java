@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;  // Import List class here
+
 @RestController
 @RequestMapping("/api")
 public class UserController {
@@ -43,4 +45,18 @@ public class UserController {
         }
     }
 
+    // Get all users
+    @GetMapping("/users")  // This is the correct endpoint for getting all users
+    public ResponseEntity<List<User>> getAllUsers() {
+        try {
+            List<User> users = userService.getAllUsers(); // Service method to fetch all users
+            if (!users.isEmpty()) {
+                return ResponseEntity.ok(users);  // Return all users with status 200 OK
+            } else {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);  // No content found
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);  // Handle any server error
+        }
+    }
 }
